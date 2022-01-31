@@ -1,5 +1,6 @@
-import os
+import datetime
 import logging
+import os
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -22,6 +23,16 @@ collanswers = cluster.bot.answers
 
 all_content_types = ["text", "sticker", "photo",
                      "voice", "document", "video", "video_note"]
+
+
+formatter = '[%(asctime)s] %(levelname)8s --- %(message)s (%(filename)s:%(lineno)s)'
+logging.basicConfig(
+    filename=f'logs/bot-from-{datetime.datetime.now().date()}.log',
+    filemode='w',
+    format=formatter,
+    datefmt='%Y-%m-%d %H:%M:%S',
+    level=logging.WARNING
+)
 
 
 async def on_startup(dp):
